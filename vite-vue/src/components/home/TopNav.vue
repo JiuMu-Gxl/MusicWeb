@@ -9,7 +9,7 @@
         <!-- 顶部菜单 -->
         <div class="topContent">
             <span>我的</span>
-            <span>发现</span>
+            <span class="active">发现</span>
             <span>云村</span>
             <span>视频</span>
         </div>
@@ -29,11 +29,20 @@ export default {
 <style lang="less">
     .topNav{
         width: 100%;
-        padding: 10px;
+        height: 1rem;
+        padding: 0.2rem;
         display: flex;
         justify-content: space-between;
+        align-items: center;
         .topContent{
-            
+            width: 60%;
+            height: 100%;
+            display: flex;
+            justify-content: space-around;
+            font-size: .36rem;
+            .active{
+                font-weight: bold;
+            }
         }
     }
 </style>
