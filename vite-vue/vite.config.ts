@@ -1,5 +1,6 @@
 import { ConfigEnv, defineConfig, loadEnv, UserConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import styleImport, { VantResolve } from 'vite-plugin-style-import';
 
 // https://vitejs.dev/config/
 export default defineConfig(({command, mode}: ConfigEnv): UserConfig => {
@@ -12,6 +13,11 @@ export default defineConfig(({command, mode}: ConfigEnv): UserConfig => {
     server: {
       port: 3001
     },
-    plugins: [vue()] 
+    plugins: [
+      vue(),
+      styleImport({
+        resolves: [VantResolve()],
+      }),
+    ] 
   };
 })
