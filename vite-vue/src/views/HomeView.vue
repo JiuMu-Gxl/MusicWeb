@@ -1,9 +1,15 @@
 <template>
-  <svg class="icon" aria-hidden="true">
-    <use xlink:href="#icon-wymusic31liebiao"></use>
-  </svg>
+  <div class="home">
+    <top-nav></top-nav>
+  </div>
 </template>
 
 <script lang="ts">
-  
+import TopNav from "../components/home/TopNav.vue";
+export default {
+  name: 'home',
+  components: {
+    TopNav,
+  }
+}
 </script>
