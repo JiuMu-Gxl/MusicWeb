@@ -30,14 +30,24 @@
 <style lang="less">
     .iconList{
         width: 100%;
+        height: 2rem;
+        margin-top: .2rem;
         display: flex;
         justify-content: space-around;
         text-align: center;
         align-items: center;
         margin: .2rem;
         font-size: .24rem;
-        .icon{
-            width: 100%;
+        .iconItem{
+            width: 25%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .icon{
+                width: 1rem;
+                height: 1rem;
+            }
         }
     }
 </style>
