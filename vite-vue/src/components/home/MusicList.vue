@@ -6,7 +6,7 @@
         </div>
         <div class="musicContent">
             <van-swipe :loop="false" :show-indicators="false" :width="150" class="mySwipe">
-                <van-swipe-item v-for="(item, index) in musicList" :key="index">
+                <van-swipe-item v-for="(item, index) in state.musicList" :key="index">
                     <img :src="item.picUrl" :alt="item.name" />
                     <span class="playCount">
                         <svg class="icon" aria-hidden="true">
@@ -23,20 +23,46 @@
     </div>
 </template>
 <script lang="ts">
+import { reactive, onMounted } from "vue";
 import { GetMusicList } from "../../api/home/index";
 export default {
-    // Vue2写法
-    data(){
-        return {
+    // // Vue2写法
+    // data(){
+    //     return {
+    //         musicList: []
+    //     }
+    // },
+    // methods: {
+    //     async GetMusicList() {
+    //         let res = await GetMusicList();
+    //         this.musicList = res.result;
+    //     },
+    //     ChangeplayCount(num:number) {
+    //         switch (true) {
+    //             case num >= 100000000:
+    //                 return (num / 100000000).toFixed(2) + "亿";
+    //             case num >= 10000:
+    //                 return (num / 10000).toFixed(2) + "万";
+    //         }
+    //     }
+    // },
+    // mounted() {
+    //     this.GetMusicList();
+    // },
+    // Vue3写法
+    setup() {
+        const state = reactive({
             musicList: []
-        }
-    },
-    methods: {
-        async GetMusicList() {
+        });
+
+        async function GetGeDan() {
             let res = await GetMusicList();
-            this.musicList = res.result;
-        },
-        ChangeplayCount(num:number) {
+            console.log(res, "res");
+            
+            state.musicList = res.result;
+        }
+
+        function ChangeplayCount(num:number) {
             switch (true) {
                 case num >= 100000000:
                     return (num / 100000000).toFixed(2) + "亿";
@@ -44,10 +70,13 @@ export default {
                     return (num / 10000).toFixed(2) + "万";
             }
         }
-    },
-    mounted() {
-        this.GetMusicList();
-    },
+
+        onMounted(async () => {
+            await GetGeDan();
+        });
+
+        return { state, ChangeplayCount };
+    }
 }
 </script>
 <style lang="less">
