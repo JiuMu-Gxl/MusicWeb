@@ -22,7 +22,7 @@ export default {
 
     onMounted(async () => {
         let res = await getBanner();
-        state.images = res.data.banners;
+        state.images = res.banners;
     });
     return { state };
   },

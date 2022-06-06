@@ -31,12 +31,11 @@
     .iconList{
         width: 100%;
         height: 2rem;
-        margin-top: .2rem;
         display: flex;
         justify-content: space-around;
         text-align: center;
         align-items: center;
-        margin: .2rem;
+        margin: .4rem .2rem 0 .2rem;
         font-size: .24rem;
         .iconItem{
             width: 25%;

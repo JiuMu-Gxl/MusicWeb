@@ -1,12 +1,7 @@
-import service from "..";
+import request from "../request";
 
 // 获取首页轮播图
-export function getBanner() {
-    return service({
-        method: 'get',
-        url: '/banner?type=2'
-    })
-}
+export const getBanner = (data: any = 2) => request({ url: '/banner?type=' + data, method: "get"});
 
 // 获取发现好歌单
-
+export const GetMusicList = (data: any = 10) => request({ url: '/personalized?limit=' + data, method: "get" });
