@@ -7,16 +7,18 @@
         <div class="musicContent">
             <van-swipe :loop="false" :show-indicators="false" :width="150" class="mySwipe">
                 <van-swipe-item v-for="(item, index) in state.musicList" :key="index">
-                    <img :src="item.picUrl" :alt="item.name" />
-                    <span class="playCount">
-                        <svg class="icon" aria-hidden="true">
-                            <use xlink:href="#icon-wymusicbofang-copy"></use>
-                        </svg>
-                        {{ChangeplayCount(item.playCount)}}
-                    </span>
-                    <div class="title">
-                        {{item.name}}
-                    </div>
+                    <router-link :to="'/about/' + item.id">
+                        <img :src="item.picUrl" :alt="item.name" />
+                        <span class="playCount">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-wymusicbofang-copy"></use>
+                            </svg>
+                            {{ChangeplayCount(item.playCount)}}
+                        </span>
+                        <div class="title">
+                            {{item.name}}
+                        </div>
+                    </router-link>
                 </van-swipe-item>
             </van-swipe>
         </div>
@@ -127,7 +129,7 @@ export default {
                     }
                 }
                 .title{
-                    font-size: .28rem;
+                    font-size: .24rem;
                 }
             }
         }

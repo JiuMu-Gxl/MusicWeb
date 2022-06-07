@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div>
     <TopNav />
     <SwiperTop />
     <IconList />
@@ -13,7 +13,7 @@ import SwiperTop from "../components/home/SwiperTop.vue";
 import IconList from "../components/home/IconList.vue";
 import MusicList from "../components/home/MusicList.vue";
 export default {
-  name: 'home',
+  name: 'Home',
   components: {
     TopNav,
     SwiperTop,

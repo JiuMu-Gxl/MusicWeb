@@ -27,15 +27,15 @@
     </div>
 </template>
 
-<style lang="less">
+<style lang="less" scoped>
     .iconList{
         width: 100%;
-        height: 2rem;
+        height: 1.5rem;
         display: flex;
         justify-content: space-around;
         text-align: center;
         align-items: center;
-        margin: .4rem .2rem 0 .2rem;
+        margin: .2rem 0;
         font-size: .24rem;
         .iconItem{
             width: 25%;

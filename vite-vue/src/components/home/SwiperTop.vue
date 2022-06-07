@@ -37,7 +37,7 @@ export default {
       padding: 0 0.2rem;
       img {
         width: 100%;
-        height: 3rem;
+        height: 100%;
         border-radius: 0.2rem;
       }
     }

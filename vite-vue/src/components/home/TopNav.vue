@@ -35,7 +35,7 @@ export default {
         justify-content: space-between;
         align-items: center;
         .topContent{
-            width: 60%;
+            width: 65%;
             height: 100%;
             display: flex;
             justify-content: space-around;

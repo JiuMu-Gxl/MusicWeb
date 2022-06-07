@@ -3,3 +3,9 @@
     <h1>This is an about page</h1>
   </div>
 </template>
+
+<script lang="ts" setup>
+  import { useRoute } from 'vue-router';
+  let route = useRoute();
+  console.log(route.params.id);
+</script>
