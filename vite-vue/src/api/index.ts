@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // 创建axios实例 请求
 let service: any = axios.create({
-    baseURL: "http://localhost:3000/",
+    baseURL: "https://netease-cloud-music-api-alpha-fawn.vercel.app/",
     timeout: 5000,
 })
 
