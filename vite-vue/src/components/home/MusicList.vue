@@ -6,19 +6,17 @@
         </div>
         <div class="musicContent">
             <van-swipe :loop="false" :show-indicators="false" :width="150" class="mySwipe">
-                <van-swipe-item v-for="(item, index) in state.musicList" :key="index">
-                    <router-link :to="'/about/' + item.id">
-                        <img :src="item.picUrl" :alt="item.name" />
-                        <span class="playCount">
-                            <svg class="icon" aria-hidden="true">
-                                <use xlink:href="#icon-wymusicbofang-copy"></use>
-                            </svg>
-                            {{ChangeplayCount(item.playCount)}}
-                        </span>
-                        <div class="title">
-                            {{item.name}}
-                        </div>
-                    </router-link>
+                <van-swipe-item v-for="(item, index) in state.musicList" :key="index" @click="ToItemDetail(item.id)">
+                    <img :src="item.picUrl" :alt="item.name" />
+                    <span class="playCount">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-wymusicbofang-copy"></use>
+                        </svg>
+                        {{ChangeplayCount(item.playCount)}}
+                    </span>
+                    <div class="title">
+                        {{item.name}}
+                    </div>
                 </van-swipe-item>
             </van-swipe>
         </div>
@@ -27,6 +25,7 @@
 <script lang="ts">
 import { reactive, onMounted } from "vue";
 import { GetMusicList } from "../../api/home/index";
+import router from '../../router/index'
 export default {
     // // Vue2写法
     // data(){
@@ -59,11 +58,10 @@ export default {
 
         async function GetGeDan() {
             let res = await GetMusicList();
-            console.log(res, "res");
-            
             state.musicList = res.result;
         }
 
+        // 格式化播放量
         function ChangeplayCount(num:number) {
             switch (true) {
                 case num >= 100000000:
@@ -73,11 +71,21 @@ export default {
             }
         }
 
+        // 路由跳转
+        function ToItemDetail(id:any) {
+            router.push({
+                name: 'itemmusic',
+                query: {
+                    id: id
+                }
+            });
+        }
+
         onMounted(async () => {
             await GetGeDan();
         });
 
-        return { state, ChangeplayCount };
+        return { state, ChangeplayCount, ToItemDetail };
     }
 }
 </script>
@@ -113,7 +121,7 @@ export default {
                 height: 3.8rem;
                 img{
                     width: 100%;
-                    height: 2.4rem;
+                    height: 2.7rem;
                     border-radius: 0.2rem;
                 }
                 .playCount{

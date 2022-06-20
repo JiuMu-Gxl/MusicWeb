@@ -19,6 +19,6 @@ export default {
     SwiperTop,
     IconList,
     MusicList
-}
+  }
 }
 </script>
