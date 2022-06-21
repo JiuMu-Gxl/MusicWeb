@@ -5,6 +5,11 @@
             <div class="more">查看更多</div>
         </div>
         <div class="musicContent">
+            <van-swipe :loop="false" :show-indicators="false" :width="150" class="mySwipeSkeleton" v-show="state.loading">
+                <van-swipe-item v-for="(item, index) in 10" :key="index">
+                    <van-skeleton avatar :loading="state.loading" />
+                </van-swipe-item>
+            </van-swipe>
             <van-swipe :loop="false" :show-indicators="false" :width="150" class="mySwipe">
                 <van-swipe-item v-for="(item, index) in state.musicList" :key="index" @click="ToItemDetail(item.id)">
                     <img :src="item.picUrl" :alt="item.name" />
@@ -23,6 +28,7 @@
     </div>
 </template>
 <script lang="ts">
+import { stat } from "fs";
 import { reactive, onMounted } from "vue";
 import { GetMusicList } from "../../api/home/index";
 import router from '../../router/index'
@@ -53,12 +59,14 @@ export default {
     // Vue3写法
     setup() {
         const state = reactive({
-            musicList: []
+            musicList: [],
+            loading: true
         });
 
         async function GetGeDan() {
             let res = await GetMusicList();
             state.musicList = res.result;
+            state.loading = false;
         }
 
         // 格式化播放量
@@ -138,6 +146,17 @@ export default {
                 }
                 .title{
                     font-size: .24rem;
+                }
+
+                .van-skeleton{
+                    width: 100%;
+                    height: 2.7rem;
+                    padding: 0;
+                    .van-skeleton__avatar{
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 0.2rem;
+                    }
                 }
             }
         }
