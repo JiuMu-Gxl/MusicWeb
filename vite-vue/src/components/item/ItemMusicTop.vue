@@ -181,7 +181,7 @@ export default {
             }
             .rightDesc{
                 width: 100%;
-                height: .6rem;
+                height: .7rem;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;

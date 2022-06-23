@@ -2,7 +2,7 @@
     <div class="musicList">
         <div class="musicTop">
             <div class="title">发现好歌单</div>
-            <div class="more">查看更多</div>
+            <div class="more" @click="InitGeDan">查看更多</div>
         </div>
         <div class="musicContent">
             <van-swipe :loop="false" :show-indicators="false" :width="150" class="mySwipeSkeleton" v-show="state.loading">
@@ -69,6 +69,10 @@ export default {
             state.loading = false;
         }
 
+        function InitGeDan() {
+            GetGeDan();
+        }
+
         // 格式化播放量
         function ChangeplayCount(num:number) {
             switch (true) {
@@ -93,7 +97,7 @@ export default {
             await GetGeDan();
         });
 
-        return { state, ChangeplayCount, ToItemDetail };
+        return { state, ChangeplayCount, ToItemDetail, InitGeDan };
     }
 }
 </script>
