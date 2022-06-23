@@ -1,4 +1,4 @@
-import request from "../request";
+import request from "../index";
 
 // 获取歌单信息
 export const getMusicItemList = (data: any, s: number = 8) => request({ url: `/playlist/detail?id=${data}&s=${s}`, method: "get"});

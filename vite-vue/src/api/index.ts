@@ -57,5 +57,15 @@ service.interceptors.response.use((response: any) => {
     console.log(error, "error-response");
 });
 
+// 封装追加请求所需的其他参数
+function request({ method='get', url = '', data = {}, callback = {} }) {
+    return service({
+        method,
+        url,
+        data,
+        callback
+    });
+}
+
 // 导出实例
-export default service;
+export default request;
