@@ -11,7 +11,7 @@ export default defineConfig(({command, mode}: ConfigEnv): UserConfig => {
   var env = loadEnv(mode, root);
   return {
     server: {
-      port: 3001,
+      port: 8080,
       proxy: {
         '/api': {
           target: "https://netease-cloud-music-api-alpha-fawn.vercel.app/",
