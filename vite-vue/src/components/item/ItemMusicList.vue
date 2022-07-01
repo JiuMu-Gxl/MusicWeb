@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="itemRight">
-                    <svg class="icon bofang" aria-hidden="true">
+                    <svg class="icon bofang" aria-hidden="true" @click="playMusic(item, index)">
                         <use xlink:href="#icon-wymusictuijian"></use>
                     </svg>
                     <svg class="icon liebiao" aria-hidden="true">
@@ -45,15 +45,21 @@
 </template>
 <script lang="ts">
 import { inject, toRaw } from "vue";
+import { useStore } from 'vuex';
 
 export default {
     props: ["itemlist", "playlist"],
     setup(props:any) {
         // 是否预加载
         const loading = inject("loading");
-        console.log(props, "props");
-        
-        return { loading }
+        const state = useStore();
+        function playMusic(value: any, index: number) {
+            state.commit("AddMusic", value);
+            state.commit("updatePlayListIndex", state.state.playListIndex + 1);
+            console.log(state.state.playList,state.state.playListIndex);
+            
+        }
+        return { loading, playMusic }
     }
 }
 </script>

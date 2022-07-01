@@ -126,14 +126,14 @@ export default {
         }
         .musicContent{
             width: 100%;
-            height: 3.6rem;
+            height: 3.85rem;
             .van-swipe-item{
                 padding-right: 0.2rem;
                 position: relative;
-                height: 3.8rem;
+                height: 3.85rem;
                 img{
                     width: 100%;
-                    height: 2.7rem;
+                    height: 3.05rem;
                     border-radius: 0.2rem;
                 }
                 .playCount{
@@ -154,7 +154,7 @@ export default {
 
                 .van-skeleton{
                     width: 100%;
-                    height: 2.7rem;
+                    height: 3.05rem;
                     padding: 0;
                     .van-skeleton__avatar{
                         width: 100%;

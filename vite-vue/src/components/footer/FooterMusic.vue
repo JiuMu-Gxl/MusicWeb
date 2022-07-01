@@ -3,7 +3,7 @@
         <div class="footerLeft">
             <img :src="playList[playListIndex].al.picUrl" alt="">
             <div class="musicInfo">
-                <p>{{playList[playListIndex].al.name}}</p>
+                <p>{{playList[playListIndex].name}}</p>
                 <span>横滑切换上下首哦</span>
             </div>
         </div>
