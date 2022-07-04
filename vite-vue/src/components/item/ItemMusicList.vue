@@ -54,6 +54,7 @@ export default {
         const loading = inject("loading");
         const state = useStore();
         function playMusic(value: any, index: number) {
+            // 播放歌曲
             state.commit("AddMusic", value);
             if (props.isPlay) {
                 // 调用父组件的关闭模态框方法 - showPopup

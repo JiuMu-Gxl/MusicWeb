@@ -21,12 +21,15 @@ export default createStore({
   mutations: {
     AddMusic(state, value) {
       if (!value) return;
+      // 获取当前歌曲在播放列表的索引
       let isInPlayList = state.playList.findIndex(p => p.id == value.id);
+      // 若当前歌曲索引为-1则新增进播放列表 播放索引 = 播放列表长度 - 1
       if (isInPlayList < 0) {
         state.playList.push(value);
-        state.playListIndex++;
+        state.playListIndex = state.playList.length - 1;
         return;
       }
+      // 若当前歌曲索引为大于 -1 则播放索引 = 当前歌曲在播放列表的索引
       state.playListIndex = isInPlayList;
     },
     updatePlayListIndex(state, value) {
