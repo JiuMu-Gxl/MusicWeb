@@ -138,7 +138,7 @@ export default {
             }
             .palyCount{
                 position: absolute;
-                z-index: 10;
+                z-index: 0;
                 top: 0;
                 right: 0.1rem;
                 color: white;

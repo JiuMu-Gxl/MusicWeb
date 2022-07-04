@@ -11,19 +11,37 @@
             <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-wymusicbofang"></use>
             </svg>
-            <svg class="icon" aria-hidden="true">
+            <svg class="icon" aria-hidden="true" @click="showPopup">
                 <use xlink:href="#icon-wymusic31liebiao"></use>
             </svg>
         </div>
+        <!-- 弹出框 -->
+        <van-popup v-model:show="state.show" position="bottom" round :style="{ height: '10rem' }">
+            <ItemMusicList :itemlist="playList" :is-play="true" @showPopup="showPopup" />
+            <van-button class="clossBtn" block @click="showPopup">关闭</van-button>
+        </van-popup>
     </div>
 </template>
 <script lang="ts">
+import { reactive } from 'vue';
 import {mapState} from 'vuex';
+import ItemMusicList from '../item/ItemMusicList.vue';
 export default {
     computed: {
         // 对vuex中的变量 解构
-        ...mapState(['playList', 'playListIndex'])
-    }
+        ...mapState(["playList", "playListIndex"])
+    },
+    setup() {
+        const state = reactive({
+            show: false
+        });
+        // 打开/关闭模态框方法
+        function showPopup() {
+            state.show = state.show ? false : true;
+        }
+        return { state, showPopup };
+    },
+    components: { ItemMusicList }
 }
 </script>
 <style lang="less">
@@ -69,5 +87,23 @@ export default {
                 fill: black;
             }
         }
+        .van-popup{
+            background-color: rgb(250, 250, 250);
+            .playList{
+                width: 100%;
+                height: 9rem;
+                background-color: lightblue;
+                padding: .3rem .4rem;
+                overflow: auto;
+
+            }
+            .clossBtn{
+                position: fixed;
+                height: 1rem;
+                bottom: 0;
+                z-index: 10;
+            }
+        }
+        
     } 
 </style>

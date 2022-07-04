@@ -1,20 +1,20 @@
 <template>
     <div class="itemMusicList">
-        <div class="itemListTop">
+        <div class="itemListTop" v-if="!isPlay">
             <div class="listLeft">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-wymusic31liebiao"></use>
                 </svg>
                 <span>
                     播放全部
-                    <span class="listCount">(共{{playlist.trackCount}}首)</span>
+                    <span class="listCount">(共{{ playlist ? playlist.trackCount : 0}}首)</span>
                 </span>
             </div>
             <div class="listRight">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-wymusic31liebiao"></use>
                 </svg>
-                <span>收藏({{playlist.subscribedCount}})</span>
+                <span>收藏({{ playlist ? playlist.subscribedCount : 0}})</span>
             </div>
         </div>
         <div class="itemList">
@@ -48,16 +48,17 @@ import { inject, toRaw } from "vue";
 import { useStore } from 'vuex';
 
 export default {
-    props: ["itemlist", "playlist"],
-    setup(props:any) {
+    props: ["itemlist", "playlist", 'isPlay'],
+    setup(props:any, ctx: any) {
         // 是否预加载
         const loading = inject("loading");
         const state = useStore();
         function playMusic(value: any, index: number) {
             state.commit("AddMusic", value);
-            state.commit("updatePlayListIndex", state.state.playListIndex + 1);
-            console.log(state.state.playList,state.state.playListIndex);
-            
+            if (props.isPlay) {
+                // 调用父组件的关闭模态框方法 - showPopup
+                ctx.emit("showPopup")
+            }
         }
         return { loading, playMusic }
     }

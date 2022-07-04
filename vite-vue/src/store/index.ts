@@ -21,14 +21,17 @@ export default createStore({
   mutations: {
     AddMusic(state, value) {
       if (!value) return;
-      let isInPlayList = !state.playList.find(p => p.id == value.id);
-      if (isInPlayList) {
+      let isInPlayList = state.playList.findIndex(p => p.id == value.id);
+      if (isInPlayList < 0) {
         state.playList.push(value);
+        state.playListIndex++;
+        return;
       }
+      state.playListIndex = isInPlayList;
     },
     updatePlayListIndex(state, value) {
       if (value < 0) value = 0;
-      if (value >= state.playList.length) value = state.playList.length;
+      if (value >= state.playList.length) value = state.playList.length - 1;
       state.playListIndex = value;
     }
   },

@@ -1,6 +1,6 @@
 <template>
     <ItemMusicTop :playlist="state.playList" />
-    <ItemMusicList :itemlist="state.itemList" :playlist="state.playList" />
+    <ItemMusicList :itemlist="state.itemList" :playlist="state.playList" :is-play="false" />
 </template>
 <script lang="ts">
 import { useRoute } from "vue-router"

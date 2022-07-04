@@ -1,7 +1,7 @@
-import { Button, Swipe, SwipeItem,Skeleton } from 'vant';
+import { Button, Swipe, SwipeItem,Skeleton,Popup } from 'vant';
 // 引入的组件放入数组中
 let plugins = [
-    Button, Swipe, SwipeItem,Skeleton 
+    Button, Swipe, SwipeItem,Skeleton,Popup
 ];
 
 export default function getVant(app: any) {
