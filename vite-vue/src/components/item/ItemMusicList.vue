@@ -3,7 +3,7 @@
         <div class="itemListTop" v-if="!isPlay">
             <div class="listLeft">
                 <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-wymusic31liebiao"></use>
+                    <use xlink:href="#icon-wymusicbofang"></use>
                 </svg>
                 <span>
                     播放全部
@@ -12,14 +12,14 @@
             </div>
             <div class="listRight">
                 <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-wymusic31liebiao"></use>
+                    <use xlink:href="#icon-wymusictianjia"></use>
                 </svg>
                 <span>收藏({{ playlist ? playlist.subscribedCount : 0}})</span>
             </div>
         </div>
         <div class="itemList">
             <div class="item" v-for="(item, index) in itemlist" :key="index">
-                <div class="itemLeft">
+                <div class="itemLeft" @click="playMusic(item, index)">
                     <div class="number">{{index + 1}}</div>
                     <div class="itemInfo">
                         <p>{{ item.name }}</p>
@@ -32,11 +32,11 @@
                     </div>
                 </div>
                 <div class="itemRight">
-                    <svg class="icon bofang" aria-hidden="true" @click="playMusic(item, index)">
-                        <use xlink:href="#icon-wymusictuijian"></use>
+                    <svg class="icon bofang" aria-hidden="true">
+                        <use xlink:href="#icon-wymusicshipin"></use>
                     </svg>
                     <svg class="icon liebiao" aria-hidden="true">
-                        <use xlink:href="#icon-wymusic31liebiao"></use>
+                        <use xlink:href="#icon-wymusicgengduo"></use>
                     </svg>
                 </div>
             </div>
@@ -111,7 +111,7 @@ export default {
                     height: 0.4rem;
                     fill: white;
                     stroke: white;
-                    stroke-width: 20;
+                    stroke-width: 60;
                 }
             }
         }
@@ -124,7 +124,7 @@ export default {
                 justify-content: space-between;
                 align-items: center;
                 .itemLeft{
-                    width: 80%;
+                    width: 75%;
                     height: 100%;
                     display: flex;
                     align-items: center;

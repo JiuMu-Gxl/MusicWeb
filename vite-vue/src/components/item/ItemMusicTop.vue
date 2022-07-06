@@ -3,7 +3,7 @@
         <img :src="playlist.coverImgUrl" class="bgImg" />
         <div class="itemLeft">
             <svg class="icon" aria-hidden="true" @click="$router.go(-1)">
-                <use xlink:href="#icon-wymusictuijian"></use>
+                <use xlink:href="#icon-wymusiczuojiantou"></use>
             </svg>
             <span>歌单</span>
         </div>
@@ -32,13 +32,13 @@
                 <img :src="playlist.creator.avatarUrl" class="userHeadImg">
                 <span class="userName">{{playlist.creator.nickname}}</span>
                 <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-wymusic31liebiao"></use>
+                    <use xlink:href="#icon-wymusicxiangyou1"></use>
                 </svg>
             </div>
             <div class="rightDesc">
                 <span>{{playlist.description}}</span>
                 <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-wymusic31liebiao"></use>
+                    <use xlink:href="#icon-wymusicxiangyou1"></use>
                 </svg>
             </div>
         </div>
@@ -46,19 +46,19 @@
     <div class="itemTopFooter">
         <div class="iconItem">
             <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-wymusictuijian"></use>
+                <use xlink:href="#icon-wymusicdaipingjia"></use>
             </svg>
             <span>{{playlist.commentCount}}</span>
         </div>
         <div class="iconItem">
             <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-wymusicbofangmoban"></use>
+                <use xlink:href="#icon-wymusicfenxiang1"></use>
             </svg>
             <span>{{playlist.shareCount}}</span>
         </div>
         <div class="iconItem">
             <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-wymusicgedan"></use>
+                <use xlink:href="#icon-wymusicxiazai"></use>
             </svg>
             <span>下载</span>
         </div>
@@ -217,11 +217,10 @@ export default {
         .iconItem{
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             color: white;
+            font-size: .32rem;
             .icon{
-                width: 1rem;
-                height: 1rem;
+                
                 fill: white;
             }
         }

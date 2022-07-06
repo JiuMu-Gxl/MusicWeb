@@ -28,7 +28,6 @@
     </div>
 </template>
 <script lang="ts">
-import { stat } from "fs";
 import { reactive, onMounted } from "vue";
 import { GetMusicList } from "../../api/home/index";
 import router from '../../router/index'
