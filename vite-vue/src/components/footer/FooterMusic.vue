@@ -8,13 +8,15 @@
             </div>
         </div>
         <div class="footerRight">
-            <svg class="icon" aria-hidden="true">
+            <svg class="icon" aria-hidden="true" @click="playMusic">
                 <use xlink:href="#icon-wymusicbofang"></use>
             </svg>
             <svg class="icon" aria-hidden="true" @click="showPopup">
                 <use xlink:href="#icon-wymusic31liebiao"></use>
             </svg>
         </div>
+        <!-- 音乐播放器 -->
+        <audio ref="MusicPlayer" controls :src="`https://music.163.com/song/media/outer/url?id=${playList[playListIndex].id}.mp3`"></audio>
         <!-- 弹出框 -->
         <van-popup v-model:show="state.show" position="bottom" round :style="{ height: '10rem' }">
             <ItemMusicList :itemlist="playList" :is-play="true" @showPopup="showPopup" />
@@ -23,7 +25,7 @@
     </div>
 </template>
 <script lang="ts">
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 import {mapState} from 'vuex';
 import ItemMusicList from '../item/ItemMusicList.vue';
 export default {
@@ -31,15 +33,28 @@ export default {
         // 对vuex中的变量 解构
         ...mapState(["playList", "playListIndex"])
     },
-    setup() {
+    setup(ctx:any) {
         const state = reactive({
-            show: false
+            show: false,
         });
+        // 通过ref获取dom元素
+        const MusicPlayer = ref();
+
         // 打开/关闭模态框方法
         function showPopup() {
             state.show = state.show ? false : true;
         }
-        return { state, showPopup };
+
+        // 播放暂停歌曲
+        function playMusic() {
+            if (MusicPlayer.value.paused) {
+                MusicPlayer.value.play();
+            } else {
+                MusicPlayer.value.pause();
+            }
+        }
+
+        return { state, MusicPlayer, showPopup,playMusic };
     },
     components: { ItemMusicList }
 }

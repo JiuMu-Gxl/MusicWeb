@@ -117,6 +117,7 @@ export default {
         }
         .itemList{
             width: 100%;
+            padding-bottom: 1.4rem;
             .item{
                 width: 100%;
                 height: 1.4rem;
