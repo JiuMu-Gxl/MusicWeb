@@ -11,6 +11,7 @@ export default defineConfig(({command, mode}: ConfigEnv): UserConfig => {
   var env = loadEnv(mode, root);
   return {
     server: {
+      host: '0.0.0.0',
       port: 8080,
       proxy: {
         '/api': {
