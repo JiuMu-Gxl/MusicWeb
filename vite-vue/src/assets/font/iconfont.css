@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3444305 */
-  src: url('iconfont.woff2?t=1656986499392') format('woff2'),
-       url('iconfont.woff?t=1656986499392') format('woff'),
-       url('iconfont.ttf?t=1656986499392') format('truetype');
+  src: url('iconfont.woff2?t=1657117830432') format('woff2'),
+       url('iconfont.woff?t=1657117830432') format('woff'),
+       url('iconfont.ttf?t=1657117830432') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,22 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-wymusiczanting:before {
+  content: "\e602";
+}
+
+.icon-wymusicbofang1:before {
+  content: "\e8a3";
+}
+
+.icon-wymusicbofang2:before {
+  content: "\e626";
+}
+
+.icon-wymusiczanting1:before {
+  content: "\e629";
 }
 
 .icon-wymusicshipin:before {
