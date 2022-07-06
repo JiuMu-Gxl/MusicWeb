@@ -8,18 +8,21 @@
             </div>
         </div>
         <div class="footerRight">
-            <svg class="icon" aria-hidden="true" @click="playMusic">
-                <use xlink:href="#icon-wymusicbofang"></use>
+            <svg v-if="state.isPlay" class="icon" aria-hidden="true" @click="playMusic">
+                <use xlink:href="#icon-wymusiczanting1"></use>
+            </svg>
+            <svg v-else class="icon" aria-hidden="true" @click="playMusic">
+                <use xlink:href="#icon-wymusicbofang2"></use>
             </svg>
             <svg class="icon" aria-hidden="true" @click="showPopup">
                 <use xlink:href="#icon-wymusic31liebiao"></use>
             </svg>
         </div>
         <!-- 音乐播放器 -->
-        <audio ref="MusicPlayer" controls :src="`https://music.163.com/song/media/outer/url?id=${playList[playListIndex].id}.mp3`"></audio>
+        <audio ref="MusicPlayer" :src="`https://music.163.com/song/media/outer/url?id=${playList[playListIndex].id}.mp3`"></audio>
         <!-- 弹出框 -->
         <van-popup v-model:show="state.show" position="bottom" round :style="{ height: '10rem' }">
-            <ItemMusicList :itemlist="playList" :is-play="true" @showPopup="showPopup" />
+            <ItemMusicList :itemlist="playList" :is-play="true" @showPopup="showPopup" @playMusic="playMusic" />
             <van-button class="clossBtn" block @click="showPopup">关闭</van-button>
         </van-popup>
     </div>
@@ -36,6 +39,7 @@ export default {
     setup(ctx:any) {
         const state = reactive({
             show: false,
+            isPlay: false
         });
         // 通过ref获取dom元素
         const MusicPlayer = ref();
@@ -49,8 +53,10 @@ export default {
         function playMusic() {
             if (MusicPlayer.value.paused) {
                 MusicPlayer.value.play();
+                state.isPlay = true;
             } else {
                 MusicPlayer.value.pause();
+                state.isPlay = false;
             }
         }
 

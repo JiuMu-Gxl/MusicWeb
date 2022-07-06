@@ -58,7 +58,7 @@ export default {
             state.commit("AddMusic", value);
             if (props.isPlay) {
                 // 调用父组件的关闭模态框方法 - showPopup
-                ctx.emit("showPopup")
+                ctx.emit("showPopup");
             }
         }
         return { loading, playMusic }

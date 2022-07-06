@@ -32,7 +32,6 @@ export default {
             // 获取歌单详情
             let res = await getMusicItemList(id);
             state.playList = res.playlist;
-            console.log(state.playList);
             
             // 获取歌单所有歌曲
             res = await getItemList(id);
