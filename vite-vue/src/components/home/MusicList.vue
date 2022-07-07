@@ -129,10 +129,10 @@ export default {
             .van-swipe-item{
                 padding-right: 0.2rem;
                 position: relative;
-                height: 3.85rem;
+                height: 100%;
                 img{
                     width: 100%;
-                    height: 3.05rem;
+                    height: 70%;
                     border-radius: 0.2rem;
                 }
                 .playCount{

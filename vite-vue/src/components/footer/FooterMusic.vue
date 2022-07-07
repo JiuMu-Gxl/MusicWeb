@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="footerRight">
-            <svg v-if="state.isPlay" class="icon" aria-hidden="true" @click="playMusic">
+            <svg v-if="playState" class="icon" aria-hidden="true" @click="playMusic">
                 <use xlink:href="#icon-wymusiczanting1"></use>
             </svg>
             <svg v-else class="icon" aria-hidden="true" @click="playMusic">
@@ -19,7 +19,7 @@
             </svg>
         </div>
         <!-- 音乐播放器 -->
-        <audio ref="MusicPlayer" :src="`https://music.163.com/song/media/outer/url?id=${playList[playListIndex].id}.mp3`"></audio>
+        <audio autoplay ref="MusicPlayer" :src="`https://music.163.com/song/media/outer/url?id=${playList[playListIndex].id}.mp3`"></audio>
         <!-- 弹出框 -->
         <van-popup v-model:show="state.show" position="bottom" round :style="{ height: '10rem' }">
             <ItemMusicList :itemlist="playList" :is-play="true" @showPopup="showPopup" @playMusic="playMusic" />
@@ -28,35 +28,40 @@
     </div>
 </template>
 <script lang="ts">
-import { reactive, ref } from 'vue';
-import {mapState} from 'vuex';
+import { reactive, ref, onMounted } from 'vue';
+import {mapState, useStore} from 'vuex';
 import ItemMusicList from '../item/ItemMusicList.vue';
 export default {
     computed: {
         // 对vuex中的变量 解构
-        ...mapState(["playList", "playListIndex"])
+        ...mapState(["playList", "playListIndex", "playState"])
     },
     setup(ctx:any) {
         const state = reactive({
-            show: false,
-            isPlay: false
+            show: false
         });
         // 通过ref获取dom元素
         const MusicPlayer = ref();
+        const state_vuex = useStore();
 
         // 打开/关闭模态框方法
         function showPopup() {
             state.show = state.show ? false : true;
         }
 
+        // 页面预加载默认关闭音乐
+        onMounted(() => {
+            MusicPlayer.value.pause();
+        });
+
         // 播放暂停歌曲
         function playMusic() {
             if (MusicPlayer.value.paused) {
                 MusicPlayer.value.play();
-                state.isPlay = true;
+                state_vuex.commit("updatePlayState", true);
             } else {
                 MusicPlayer.value.pause();
-                state.isPlay = false;
+                state_vuex.commit("updatePlayState", false);
             }
         }
 

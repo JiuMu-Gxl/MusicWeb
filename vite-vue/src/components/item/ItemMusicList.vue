@@ -56,6 +56,7 @@ export default {
         function playMusic(value: any, index: number) {
             // 播放歌曲
             state.commit("AddMusic", value);
+            state.commit("updatePlayState", true);
             if (props.isPlay) {
                 // 调用父组件的关闭模态框方法 - showPopup
                 ctx.emit("showPopup");

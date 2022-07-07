@@ -217,11 +217,12 @@ export default {
         .iconItem{
             display: flex;
             flex-direction: column;
+            align-items: center;
             color: white;
             font-size: .32rem;
             .icon{
-                
                 fill: white;
+                margin-bottom: .1rem;
             }
         }
     }

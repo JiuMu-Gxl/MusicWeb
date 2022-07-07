@@ -15,6 +15,7 @@ export default createStore({
       id: 108653
     }],
     playListIndex: 0,  // 播放列表-播放歌曲下标
+    playState: false,
   },
   getters: {
   },
@@ -36,6 +37,9 @@ export default createStore({
       if (value < 0) value = 0;
       if (value >= state.playList.length) value = state.playList.length - 1;
       state.playListIndex = value;
+    },
+    updatePlayState(state, value) {
+      state.playState = value;
     }
   },
   actions: {
