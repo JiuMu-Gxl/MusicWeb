@@ -1,6 +1,6 @@
 <template>
-    <div class="footerMusic">
-        <div class="footerLeft">
+    <div :class="{'footerMusic': true, 'noMusic': !isCanPlay}">
+        <div class="footerLeft" @click="showMusicDetailPopup">
             <img :src="playList[playListIndex].al.picUrl" alt="">
             <div class="musicInfo">
                 <p>{{playList[playListIndex].name}}</p>
@@ -14,23 +14,28 @@
             <svg v-else class="icon" aria-hidden="true" @click="playMusic">
                 <use xlink:href="#icon-wymusicbofang2"></use>
             </svg>
-            <svg class="icon" aria-hidden="true" @click="showPopup">
+            <svg class="icon" aria-hidden="true" @click="showMusicListPopup">
                 <use xlink:href="#icon-wymusic31liebiao"></use>
             </svg>
         </div>
         <!-- 音乐播放器 -->
         <audio autoplay ref="MusicPlayer" :src="`https://music.163.com/song/media/outer/url?id=${playList[playListIndex].id}.mp3`"></audio>
-        <!-- 弹出框 -->
-        <van-popup v-model:show="state.show" position="bottom" round :style="{ height: '10rem' }">
-            <ItemMusicList :itemlist="playList" :is-play="true" @showPopup="showPopup" @playMusic="playMusic" />
-            <van-button class="clossBtn" block @click="showPopup">关闭</van-button>
+        <!-- 歌曲列表弹出框 -->
+        <van-popup v-model:show="state.musicListPop" position="bottom" round :style="{ height: '10rem' }">
+            <ItemMusicList :itemlist="playList" :is-play="true" @showPopup="showMusicListPopup" @playMusic="playMusic" />
+            <van-button class="clossBtn" block @click="showMusicListPopup">关闭</van-button>
+        </van-popup>
+        <!-- 歌曲信息弹出框 -->
+        <van-popup v-model:show="state.musicDetailPop" position="bottom" :style="{ width: '100%', height: '100%' }">
+            <MusicDetail @showPopup="showMusicDetailPopup" @playMusic="playMusic"></MusicDetail>
         </van-popup>
     </div>
 </template>
 <script lang="ts">
-import { reactive, ref, onMounted } from 'vue';
+import { reactive, ref, onMounted, watch } from 'vue';
 import {mapState, useStore} from 'vuex';
 import ItemMusicList from '../item/ItemMusicList.vue';
+import MusicDetail from './MusicDetail.vue';
 export default {
     computed: {
         // 对vuex中的变量 解构
@@ -38,15 +43,27 @@ export default {
     },
     setup(ctx:any) {
         const state = reactive({
-            show: false
+            musicListPop: false,
+            musicDetailPop: false
         });
         // 通过ref获取dom元素
         const MusicPlayer = ref();
         const state_vuex = useStore();
+        const isCanPlay = state_vuex.state.isCanPlay;
+        
+        watch(state_vuex.state.isCanPlay, (oldValue: any, newValue: any) => {
+            console.log(oldValue, newValue);
+        })
 
-        // 打开/关闭模态框方法
-        function showPopup() {
-            state.show = state.show ? false : true;
+        // 打开/关闭音乐列表模态框方法
+        function showMusicListPopup() {
+            if (!isCanPlay) return;
+            state.musicListPop = state.musicListPop ? false : true;
+        }
+        // 打开/关闭音乐列表模态框方法
+        function showMusicDetailPopup() {
+            if (!isCanPlay) return;
+            state.musicDetailPop = state.musicDetailPop ? false : true;
         }
 
         // 页面预加载默认关闭音乐
@@ -56,6 +73,7 @@ export default {
 
         // 播放暂停歌曲
         function playMusic() {
+            if (!isCanPlay) return;
             if (MusicPlayer.value.paused) {
                 MusicPlayer.value.play();
                 state_vuex.commit("updatePlayState", true);
@@ -65,9 +83,9 @@ export default {
             }
         }
 
-        return { state, MusicPlayer, showPopup,playMusic };
+        return { state, isCanPlay, MusicPlayer, showMusicListPopup,showMusicDetailPopup,playMusic };
     },
-    components: { ItemMusicList }
+    components: { ItemMusicList, MusicDetail }
 }
 </script>
 <style lang="less">
@@ -95,9 +113,14 @@ export default {
             }
             .musicInfo{
                 margin-left: .4rem;
+                overflow: hidden;
+                padding-right: .2rem;
                 p{
                     font-size: .32rem;
                     font-weight: bold;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
                 span{
                     font-size: .24rem;
@@ -121,7 +144,6 @@ export default {
                 background-color: lightblue;
                 padding: .3rem .4rem;
                 overflow: auto;
-
             }
             .clossBtn{
                 position: fixed;
@@ -131,5 +153,14 @@ export default {
             }
         }
         
-    } 
+    }
+    .noMusic{
+        color: #a5a5a5;
+        .footerRight{
+            .icon{
+                fill: #a5a5a5;
+            }
+        }
+        
+    }
 </style>

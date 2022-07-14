@@ -1,5 +1,5 @@
 <template>
-    <div class="itemMusicList">
+    <div class="itemMusicList" v-if="isCanPlay">
         <div class="itemListTop" v-if="!isPlay">
             <div class="listLeft">
                 <svg class="icon" aria-hidden="true">
@@ -14,7 +14,7 @@
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-wymusictianjia"></use>
                 </svg>
-                <span>收藏({{ playlist ? playlist.subscribedCount : 0}})</span>
+                <span>收藏({{ playlist ? ChangeplayCount(playlist.subscribedCount) : 0}})</span>
             </div>
         </div>
         <div class="itemList">
@@ -42,6 +42,12 @@
             </div>
         </div>
     </div>
+    <div class="noItemList" v-else>
+        <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-wymusictuijian"></use>
+        </svg>
+        <span>暂无歌曲</span>
+    </div>
 </template>
 <script lang="ts">
 import { inject, toRaw } from "vue";
@@ -53,6 +59,8 @@ export default {
         // 是否预加载
         const loading = inject("loading");
         const state = useStore();
+        const isCanPlay = !props.isPlay || state.state.isCanPlay;
+        
         function playMusic(value: any, index: number) {
             // 播放歌曲
             state.commit("AddMusic", value);
@@ -62,7 +70,19 @@ export default {
                 ctx.emit("showPopup");
             }
         }
-        return { loading, playMusic }
+
+        // 格式化播放量
+        function ChangeplayCount(num:number) {
+            switch (true) {
+                case num >= 100000000:
+                    return (num / 100000000).toFixed(2) + "亿";
+                case num >= 10000:
+                    return (num / 10000).toFixed(2) + "w";
+                case num >= 1000:
+                    return (num / 10000).toFixed(2) + "k";
+            }
+        }
+        return { loading, isCanPlay, playMusic, ChangeplayCount }
     }
 }
 </script>
@@ -161,6 +181,20 @@ export default {
                     }
                 }
             }
+        }
+    }
+    .noItemList{
+        width: 100%;
+        height: 9rem;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        font-size: .44rem;
+        color: #a5a5a5;
+        .icon{
+            width: 1rem;
+            height: 1rem;
         }
     }
 </style>
