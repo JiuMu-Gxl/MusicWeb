@@ -32,7 +32,7 @@
     </div>
 </template>
 <script lang="ts">
-import { reactive, ref, onMounted, watch } from 'vue';
+import { reactive, ref, onMounted, watch, computed } from 'vue';
 import {mapState, useStore} from 'vuex';
 import ItemMusicList from '../item/ItemMusicList.vue';
 import MusicDetail from './MusicDetail.vue';
@@ -49,20 +49,20 @@ export default {
         // 通过ref获取dom元素
         const MusicPlayer = ref();
         const state_vuex = useStore();
-        const isCanPlay = state_vuex.state.isCanPlay;
-        
-        watch(state_vuex.state.isCanPlay, (oldValue: any, newValue: any) => {
-            console.log(oldValue, newValue);
-        })
+
+        // 使用计算属性动态获取vuex变量
+        const isCanPlay = computed(() => {
+            return state_vuex.state.isCanPlay;
+        });
 
         // 打开/关闭音乐列表模态框方法
         function showMusicListPopup() {
-            if (!isCanPlay) return;
+            if (!isCanPlay.value) return;
             state.musicListPop = state.musicListPop ? false : true;
         }
         // 打开/关闭音乐列表模态框方法
         function showMusicDetailPopup() {
-            if (!isCanPlay) return;
+            if (!isCanPlay.value) return;
             state.musicDetailPop = state.musicDetailPop ? false : true;
         }
 
@@ -73,7 +73,7 @@ export default {
 
         // 播放暂停歌曲
         function playMusic() {
-            if (!isCanPlay) return;
+            if (!isCanPlay.value) return;
             if (MusicPlayer.value.paused) {
                 MusicPlayer.value.play();
                 state_vuex.commit("updatePlayState", true);

@@ -89,7 +89,7 @@ export default {
 <style lang="less">
     .itemMusicList{
         width: 100%;
-        height: 10rem;
+        max-height: 10rem;
         background-color: rgb(250, 250, 250);
         padding: 0 0.2rem;
         border-radius: 0.4rem 0.4rem 0 0;
