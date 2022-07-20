@@ -34,8 +34,8 @@
 <script lang="ts">
 import { reactive, ref, onMounted, watch, computed } from 'vue';
 import {mapState, useStore} from 'vuex';
-import ItemMusicList from '../item/ItemMusicList.vue';
-import MusicDetail from './MusicDetail.vue';
+import ItemMusicList from '/@/components/item/ItemMusicList.vue';
+import MusicDetail from '/@/components/footer/MusicDetail.vue';
 export default {
     computed: {
         // 对vuex中的变量 解构

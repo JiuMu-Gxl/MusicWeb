@@ -29,8 +29,8 @@
 </template>
 <script lang="ts">
 import { reactive, onMounted } from "vue";
-import { GetMusicList } from "../../api/home/index";
-import router from '../../router/index'
+import { GetMusicList } from "/@/api/home/index";
+import router from '/@/router/index'
 export default {
     // // Vue2写法
     // data(){
