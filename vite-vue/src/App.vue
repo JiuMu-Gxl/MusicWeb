@@ -9,32 +9,25 @@
   <FooterMusic />
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { ref, watch } from "vue";
 import { onBeforeRouteUpdate, useRouter } from "vue-router";
 import FooterMusic from "/@/components/footer/FooterMusic.vue";
-export default {
-  components: {
-    FooterMusic,
-  },
-  setup() {
-    const animation = ref('slide');
-    let router = useRouter();
-    // watch(() => router.currentRoute.value.path,(newValue,oldValue)=> {
-    //     console.log('watch',newValue,oldValue);
-    // },{ immediate: true })
-    // onBeforeRouteUpdate((to:any) => {
-    //   console.log(to);
-    //   // if(to.meta.index > form.meta.index){
-		//   //   animation.value = 'slide-left'
-	  //   // }else{
-		//   //   animation.value = 'slide-right'
-	  //   // }
-    // });
 
-    return { animation };
-  },
-};
+const animation = ref('van-fade');
+let router = useRouter();
+// watch(() => router.currentRoute.value.path,(newValue,oldValue)=> {
+//     console.log('watch',newValue,oldValue);
+// },{ immediate: true })
+// onBeforeRouteUpdate((to:any) => {
+//   console.log(to);
+//   // if(to.meta.index > form.meta.index){
+//   //   animation.value = 'slide-left'
+//   // }else{
+//   //   animation.value = 'slide-right'
+//   // }
+// });
+
 </script>
 
 <style lang="less">

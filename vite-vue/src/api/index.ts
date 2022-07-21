@@ -4,11 +4,11 @@ import { Toast } from 'vant';
 // 创建axios实例 请求
 let service: any = axios.create({
     baseURL: "https://netease-cloud-music-api-alpha-fawn.vercel.app/",
-    timeout: 5000,
+    timeout: 10 * 1000
 })
 
 // 定义请求次数
-let requestingCount  = 0;
+let requestingCount = 0;
 
 // 请求Loading
 const handleRequestLoading = () => {

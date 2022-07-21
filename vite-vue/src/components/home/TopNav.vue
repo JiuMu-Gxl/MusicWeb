@@ -13,12 +13,45 @@
         </div>
         <!-- 搜索图标 -->
         <div class="topRight">
-            <svg-icon iconName="icon-wymusicsousuo" class="icon"></svg-icon>
+            <svg-icon iconName="icon-wymusicsousuo" class="icon" @click="showSearch"></svg-icon>
         </div>
+        <transition name="van-slide-right">
+            <div v-show="isSearch" class="search">
+                <van-search ref="searchInput" v-model="keywords" shape="round" maxlength="100" show-action placeholder="请输入搜索关键词" @search="onSearch" @cancel="onCancel"/>
+            </div>
+        </transition>
     </div>
 </template>
 <script setup lang="ts">
+import { nextTick, ref } from 'vue';
 import SvgIcon from '/@/components/SvgIcon/SvgIcon.vue'
+import router from '/@/router/index'
+
+var isSearch = ref(false);
+var searchInput = ref();
+var keywords = ref("");
+
+function showSearch() {
+    isSearch.value = true;
+    nextTick(()=>{
+        setTimeout(() => {searchInput.value.focus();}, 500);
+    });
+}
+
+function onSearch() {
+    router.push({
+        name: 'search',
+        query: {
+            keywords: keywords.value
+        }
+    });
+}
+
+function onCancel() {
+    keywords.value = "";
+    isSearch.value = false;
+}
+
 </script>
 <style lang="less">
     .topNav{
@@ -28,6 +61,7 @@ import SvgIcon from '/@/components/SvgIcon/SvgIcon.vue'
         display: flex;
         justify-content: space-between;
         align-items: center;
+        position: relative;
         .topContent{
             width: 65%;
             height: 100%;
@@ -37,6 +71,14 @@ import SvgIcon from '/@/components/SvgIcon/SvgIcon.vue'
             .active{
                 font-weight: bold;
             }
+        }
+        .search{
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            width: 100%;
+            height: 1rem;
         }
     }
 </style>
