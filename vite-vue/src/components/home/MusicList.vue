@@ -30,7 +30,6 @@ import { reactive, onMounted } from "vue";
 import { GetMusicList } from "/@/api/home/index";
 import router from '/@/router/index'
 import SvgIcon from '/@/components/SvgIcon/SvgIcon.vue'
-
 export default {
     components: {
         SvgIcon
