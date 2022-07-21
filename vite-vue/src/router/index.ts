@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw } from 'vue-router'
-import HomeView from '../views/Home.vue'
+import HomeView from '/@/views/Home.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -16,7 +16,7 @@ const routes: Array<RouteRecordRaw> = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
+    component: () => import(/* webpackChunkName: "about" */ '/@/views/AboutView.vue'),
     meta: {
       keepalive:true
     }
@@ -27,7 +27,7 @@ const routes: Array<RouteRecordRaw> = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "ItemMusic" */ '../views/ItemMusic.vue'),
+    component: () => import(/* webpackChunkName: "ItemMusic" */ '/@/views/ItemMusic.vue'),
     meta: {
       keepalive:true
     }

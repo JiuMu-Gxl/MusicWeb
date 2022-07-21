@@ -8,15 +8,9 @@
             </div>
         </div>
         <div class="footerRight">
-            <svg v-if="playState" class="icon" aria-hidden="true" @click="playMusic">
-                <use xlink:href="#icon-wymusiczanting1"></use>
-            </svg>
-            <svg v-else class="icon" aria-hidden="true" @click="playMusic">
-                <use xlink:href="#icon-wymusicbofang2"></use>
-            </svg>
-            <svg class="icon" aria-hidden="true" @click="showMusicListPopup">
-                <use xlink:href="#icon-wymusic31liebiao"></use>
-            </svg>
+            <svg-icon v-if="playState" iconName="icon-wymusiczanting1" class="icon" @click="playMusic"></svg-icon>
+            <svg-icon v-else iconName="icon-wymusicbofang2" class="icon" @click="playMusic"></svg-icon>
+            <svg-icon iconName="icon-wymusic31liebiao" class="icon" @click="showMusicListPopup"></svg-icon>
         </div>
         <!-- 音乐播放器 -->
         <audio autoplay ref="MusicPlayer" :src="`https://music.163.com/song/media/outer/url?id=${playList[playListIndex].id}.mp3`"></audio>
@@ -34,8 +28,10 @@
 <script lang="ts">
 import { reactive, ref, onMounted, watch, computed } from 'vue';
 import {mapState, useStore} from 'vuex';
-import ItemMusicList from '../item/ItemMusicList.vue';
-import MusicDetail from './MusicDetail.vue';
+import ItemMusicList from '/@/components/item/ItemMusicList.vue';
+import MusicDetail from '/@/components/footer/MusicDetail.vue';
+import SvgIcon from '/@/components/SvgIcon/SvgIcon.vue'
+
 export default {
     computed: {
         // 对vuex中的变量 解构
@@ -85,7 +81,7 @@ export default {
 
         return { state, isCanPlay, MusicPlayer, showMusicListPopup,showMusicDetailPopup,playMusic };
     },
-    components: { ItemMusicList, MusicDetail }
+    components: { ItemMusicList, MusicDetail, SvgIcon }
 }
 </script>
 <style lang="less">

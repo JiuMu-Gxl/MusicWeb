@@ -2,9 +2,7 @@
     <div class="topNav">
         <!-- 列表图标 -->
         <div class="topLeft">
-            <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-wymusic31liebiao"></use>
-            </svg>
+            <svg-icon iconName="icon-wymusic31liebiao" class="icon"></svg-icon>
         </div>
         <!-- 顶部菜单 -->
         <div class="topContent">
@@ -15,16 +13,12 @@
         </div>
         <!-- 搜索图标 -->
         <div class="topRight">
-            <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-wymusicsousuo"></use>
-            </svg>
+            <svg-icon iconName="icon-wymusicsousuo" class="icon"></svg-icon>
         </div>
     </div>
 </template>
-<script lang="ts">
-export default {
-    
-}
+<script setup lang="ts">
+import SvgIcon from '/@/components/SvgIcon/SvgIcon.vue'
 </script>
 <style lang="less">
     .topNav{

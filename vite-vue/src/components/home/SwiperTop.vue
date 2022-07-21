@@ -15,11 +15,11 @@
 <script lang="ts">
 import axios from "axios";
 import { reactive, onMounted } from "vue";
-import { getBanner } from "../../api/home";
+import { getBanner } from "/@/api/home";
 export default {
   setup() {
     let state = reactive({
-      images: [],
+      images: new Array<any>(),
       loading: true
     });
 

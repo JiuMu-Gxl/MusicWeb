@@ -21,6 +21,8 @@ export default defineConfig(({command, mode}: ConfigEnv): UserConfig => {
       alias: [
         // /@/xxxx => src/xxxx
         { find: /\/@\//, replacement: pathResolve('src') + '/' },
+        // @/xxxx => public/xxxx
+        { find: /\/%\//, replacement: pathResolve('public') + '/' },
       ]
     },
     server: {

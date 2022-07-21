@@ -2,27 +2,19 @@
     <div class="ItemMusicTop">
         <img :src="playlist.coverImgUrl" class="bgImg" />
         <div class="itemLeft">
-            <svg class="icon" aria-hidden="true" @click="$router.go(-1)">
-                <use xlink:href="#icon-wymusiczuojiantou"></use>
-            </svg>
+            <svg-icon iconName="icon-wymusiczuojiantou" class="icon" color="white" @click="$router.go(-1)"></svg-icon>
             <span>歌单</span>
         </div>
         <div class="itemRight">
-            <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-wymusicsousuo"></use>
-            </svg>
-            <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-wymusic31liebiao"></use>
-            </svg>
+            <svg-icon iconName="icon-wymusicsousuo" class="icon" color="white"></svg-icon>
+            <svg-icon iconName="icon-wymusic31liebiao" class="icon" color="white"></svg-icon>
         </div>
     </div>
     <div class="itemTopContent">
         <div class="contentLeft">
             <img :src="playlist.coverImgUrl" :alt="playlist.name" />
             <div class="palyCount">
-                <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-wymusicbofang-copy"></use>
-                </svg>
+                <svg-icon iconName="icon-wymusicbofang-copy" class="icon"></svg-icon>
                 <span>{{ ChangeplayCount(playlist.playCount) }}</span>
             </div>
         </div>
@@ -31,43 +23,37 @@
             <div class="rightUserInfo">
                 <img :src="playlist.creator.avatarUrl" class="userHeadImg">
                 <span class="userName">{{playlist.creator.nickname}}</span>
-                <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-wymusicxiangyou1"></use>
-                </svg>
+                <svg-icon iconName="icon-wymusicxiangyou1" class="icon" color="#ccc"></svg-icon>
             </div>
             <div class="rightDesc">
                 <span>{{playlist.description}}</span>
-                <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-wymusicxiangyou1"></use>
-                </svg>
+                <svg-icon iconName="icon-wymusicxiangyou1" class="icon" color="#ccc"></svg-icon>
             </div>
         </div>
     </div>
     <div class="itemTopFooter">
         <div class="iconItem">
-            <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-wymusicdaipingjia"></use>
-            </svg>
+            <svg-icon iconName="icon-wymusicdaipingjia" class="icon" color="white"></svg-icon>
             <span>{{playlist.commentCount}}</span>
         </div>
         <div class="iconItem">
-            <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-wymusicfenxiang1"></use>
-            </svg>
+            <svg-icon iconName="icon-wymusicfenxiang1" class="icon" color="white"></svg-icon>
             <span>{{playlist.shareCount}}</span>
         </div>
         <div class="iconItem">
-            <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-wymusicxiazai"></use>
-            </svg>
+            <svg-icon iconName="icon-wymusicxiazai" class="icon" color="white"></svg-icon>
             <span>下载</span>
         </div>
     </div>
 </template>
 <script lang="ts">
 import { inject } from "vue";
+import SvgIcon from '/@/components/SvgIcon/SvgIcon.vue'
 
 export default {
+    components:{
+        SvgIcon
+    },
     props:['playlist'],
     setup(props:any) {
         // 通过props进行传值，判断如果数据拿不到，就获取sessionStorage中的

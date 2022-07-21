@@ -14,9 +14,7 @@
                 <van-swipe-item v-for="(item, index) in state.musicList" :key="index" @click="ToItemDetail(item.id)">
                     <img :src="item.picUrl" :alt="item.name" />
                     <span class="playCount">
-                        <svg class="icon" aria-hidden="true">
-                            <use xlink:href="#icon-wymusicbofang-copy"></use>
-                        </svg>
+                        <svg-icon iconName="icon-wymusicbofang-copy" class="icon"></svg-icon>
                         {{ChangeplayCount(item.playCount)}}
                     </span>
                     <div class="title">
@@ -29,9 +27,14 @@
 </template>
 <script lang="ts">
 import { reactive, onMounted } from "vue";
-import { GetMusicList } from "../../api/home/index";
-import router from '../../router/index'
+import { GetMusicList } from "/@/api/home/index";
+import router from '/@/router/index'
+import SvgIcon from '/@/components/SvgIcon/SvgIcon.vue'
+
 export default {
+    components: {
+        SvgIcon
+    },
     // // Vue2写法
     // data(){
     //     return {
@@ -58,7 +61,7 @@ export default {
     // Vue3写法
     setup() {
         const state = reactive({
-            musicList: [],
+            musicList: new Array<any>(),
             loading: true
         });
 

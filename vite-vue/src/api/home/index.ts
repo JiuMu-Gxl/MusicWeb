@@ -1,4 +1,4 @@
-import request from "../index";
+import request from "/@/api/index";
 
 // 获取首页轮播图
 export const getBanner = (data: any = 2) => request({ url: '/banner?type=' + data, method: "get"});

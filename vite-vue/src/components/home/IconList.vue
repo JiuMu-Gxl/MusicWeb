@@ -1,31 +1,27 @@
 <template>
     <div class="iconList">
         <div class="iconItem">
-            <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-wymusictuijian"></use>
-            </svg>
+            <svg-icon iconName="icon-wymusictuijian" class="icon"></svg-icon>
             <span>每日推荐</span>
         </div>
         <div class="iconItem">
-            <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-wymusicbofangmoban"></use>
-            </svg>
+            <svg-icon iconName="icon-wymusicbofangmoban" class="icon"></svg-icon>
             <span>私人FM</span>
         </div>
         <div class="iconItem">
-            <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-wymusicgedan"></use>
-            </svg>
+            <svg-icon iconName="icon-wymusicgedan" class="icon"></svg-icon>
             <span>我的歌单</span>
         </div>
         <div class="iconItem">
-            <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-wymusicpaihangbang"></use>
-            </svg>
+            <svg-icon iconName="icon-wymusicpaihangbang" class="icon"></svg-icon>
             <span>排行榜</span>
         </div>
     </div>
 </template>
+
+<script setup lang="ts">
+import SvgIcon from '/@/components/SvgIcon/SvgIcon.vue'
+</script>
 
 <style lang="less" scoped>
     .iconList{

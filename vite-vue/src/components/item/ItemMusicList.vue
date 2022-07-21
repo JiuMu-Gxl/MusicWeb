@@ -2,18 +2,14 @@
     <div class="itemMusicList" v-if="isCanPlay">
         <div class="itemListTop" v-if="!isPlay">
             <div class="listLeft">
-                <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-wymusicbofang"></use>
-                </svg>
+                <svg-icon iconName="icon-wymusicbofang" class="icon"></svg-icon>
                 <span>
                     播放全部
                     <span class="listCount">(共{{ playlist ? playlist.trackCount : 0}}首)</span>
                 </span>
             </div>
             <div class="listRight">
-                <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-wymusictianjia"></use>
-                </svg>
+                <svg-icon iconName="icon-wymusictianjia" class="icon"></svg-icon>
                 <span>收藏({{ playlist ? ChangeplayCount(playlist.subscribedCount) : 0}})</span>
             </div>
         </div>
@@ -32,12 +28,8 @@
                     </div>
                 </div>
                 <div class="itemRight">
-                    <svg class="icon bofang" aria-hidden="true">
-                        <use xlink:href="#icon-wymusicshipin"></use>
-                    </svg>
-                    <svg class="icon liebiao" aria-hidden="true">
-                        <use xlink:href="#icon-wymusicgengduo"></use>
-                    </svg>
+                    <svg-icon iconName="icon-wymusicshipin" class="icon bofang" color="#999"></svg-icon>
+                    <svg-icon iconName="icon-wymusicgengduo" class="icon liebiao" color="#999"></svg-icon>
                 </div>
             </div>
         </div>
@@ -52,8 +44,12 @@
 <script lang="ts">
 import { inject, toRaw } from "vue";
 import { useStore } from 'vuex';
+import SvgIcon from '/@/components/SvgIcon/SvgIcon.vue'
 
 export default {
+    components: {
+        SvgIcon
+    },
     props: ["itemlist", "playlist", 'isPlay'],
     setup(props:any, ctx: any) {
         // 是否预加载

@@ -7,9 +7,9 @@
 <script lang="ts">
 import { useRoute } from "vue-router"
 import { onMounted, provide, reactive,ref } from 'vue'
-import { getMusicItemList, getItemList } from "../api/home/item";
-import ItemMusicTop from '../components/item/ItemMusicTop.vue'
-import ItemMusicList from '../components/item/ItemMusicList.vue'
+import { getMusicItemList, getItemList } from "/@/api/home/item";
+import ItemMusicTop from '/@/components/item/ItemMusicTop.vue'
+import ItemMusicList from '/@/components/item/ItemMusicList.vue'
 
 export default {
     name: '',
