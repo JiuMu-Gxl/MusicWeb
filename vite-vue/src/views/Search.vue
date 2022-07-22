@@ -1,7 +1,15 @@
 <template>
   <div class="search">
     <div class="searchInput">
-      <van-search v-model="keywords" shape="round" maxlength="100" show-action placeholder="请输入搜索关键词" @search="onSearch" @cancel="onCancel"></van-search>
+      <van-search 
+        v-model="keywords" 
+        shape="round" 
+        maxlength="100"
+        show-action 
+        placeholder="请输入搜索关键词" 
+        @search="onSearch" 
+        @cancel="onCancel"
+      />
     </div>
     <div class="itemList">
       <div class="item" v-for="(item, index) in searchList" :key="index">
@@ -35,7 +43,7 @@
   import router from '/@/router/index'
 
   // 获取查询条件
-  const keywords = ref();
+  const keywords = ref("");
   const route = useRoute();
   const searchList = ref(new Array<any>());
   const state = useStore();
@@ -69,9 +77,14 @@
   max-height: 10rem;
   .searchInput{
     width: 100%;
-    z-index: 100;
     position: sticky;
     top: 0;
+    .van-search{
+      box-shadow: 0 -1px 5px 1px rgba(0, 0, 0, 0.15);
+      .van-search__content{
+        background-color: var(--van-gray-2);
+      }
+    }
   }
   .itemList{
     width: 100%;

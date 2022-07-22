@@ -17,7 +17,16 @@
         </div>
         <transition name="van-slide-right">
             <div v-show="isSearch" class="search">
-                <van-search ref="searchInput" v-model="keywords" shape="round" maxlength="100" show-action placeholder="请输入搜索关键词" @search="onSearch" @cancel="onCancel"/>
+                <van-search 
+                    ref="searchInput" 
+                    v-model="keywords"
+                    shape="round" 
+                    maxlength="100" 
+                    show-action 
+                    placeholder="请输入搜索关键词" 
+                    @search="onSearch" 
+                    @cancel="onCancel"
+                />
             </div>
         </transition>
     </div>
@@ -58,10 +67,12 @@ function onCancel() {
         width: 100%;
         height: 1rem;
         padding: 0.2rem;
+        margin-bottom: 10px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         position: relative;
+        // box-shadow: 0 -1px 5px 1px rgba(0, 0, 0, 0.15);
         .topContent{
             width: 65%;
             height: 100%;
@@ -76,13 +87,16 @@ function onCancel() {
             position: absolute;
             top: 0;
             left: 0;
-            z-index: 100;
             width: 100%;
             height: 1rem;
-            overflow: hidden;
             .van-search{
                 width: 100%;
                 height: 1rem;
+                background-color: rgb(250, 250, 250);
+                box-shadow: 0 -1px 5px 1px rgba(0, 0, 0, 0.15);
+                .van-search__content{
+                    background-color: var(--van-gray-2);
+                }
             }
         }
     }
