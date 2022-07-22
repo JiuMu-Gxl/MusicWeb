@@ -1,11 +1,7 @@
 <template>
   <div class="search">
     <div class="searchInput">
-      <van-search v-model="keywords" shape="round" maxlength="100" show-action placeholder="请输入搜索关键词" @search="onSearch">
-        <template #action>
-          <div @click="onSearch">搜索</div>
-        </template>
-      </van-search>
+      <van-search v-model="keywords" shape="round" maxlength="100" show-action placeholder="请输入搜索关键词" @search="onSearch" @cancel="onCancel"></van-search>
     </div>
     <div class="itemList">
       <div class="item" v-for="(item, index) in searchList" :key="index">
@@ -36,6 +32,7 @@
   import { useStore } from 'vuex';
   import { SearchMusic } from "/@/api/home/index";
   import SvgIcon from '/@/components/SvgIcon/SvgIcon.vue'
+  import router from '/@/router/index'
 
   // 获取查询条件
   const keywords = ref();
@@ -52,6 +49,11 @@
   async function onSearch() {
     let res = await SearchMusic(keywords.value);
     searchList.value = res.result.songs;
+  }
+
+  // 关闭搜索页面
+  function onCancel() {
+    router.push({ name: 'home' });
   }
 
   // 播放歌曲

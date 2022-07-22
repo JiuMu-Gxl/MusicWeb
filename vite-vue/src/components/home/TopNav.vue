@@ -79,6 +79,11 @@ function onCancel() {
             z-index: 100;
             width: 100%;
             height: 1rem;
+            overflow: hidden;
+            .van-search{
+                width: 100%;
+                height: 1rem;
+            }
         }
     }
 </style>
