@@ -1,6 +1,7 @@
 <template>
     <div class="ItemMusicTop">
-        <img :src="playlist.coverImgUrl" class="bgImg" />
+        <van-skeleton avatar class="bgImg" :loading="loading"/>
+        <img :src="playlist.coverImgUrl" class="bgImg" v-show="!loading" />
         <div class="itemLeft">
             <svg-icon iconName="icon-wymusiczuojiantou" class="icon" color="white" @click="$router.go(-1)"></svg-icon>
             <span>歌单</span>
@@ -10,7 +11,22 @@
             <svg-icon iconName="icon-wymusic31liebiao" class="icon" color="white"></svg-icon>
         </div>
     </div>
-    <div class="itemTopContent">
+    <!-- 骨架屏 -->
+    <div class="skeletonContent" v-show="loading">
+        <div class="contentLeft">
+            <van-skeleton avatar class="titleImg" :loading="loading"/>
+        </div>
+        <div class="contentRight">
+            <div class="rightTitle"><van-skeleton :row="2" :loading="loading"/></div>
+            <div class="rightUserInfo">
+                <van-skeleton avatar :row="1" :loading="loading"/>
+            </div>
+            <div class="rightDesc">
+                <van-skeleton :row="3" :loading="loading"/>
+            </div>
+        </div>
+    </div>
+    <div class="itemTopContent" v-show="!loading">
         <div class="contentLeft">
             <img :src="playlist.coverImgUrl" :alt="playlist.name" />
             <div class="palyCount">
@@ -107,6 +123,7 @@ export default {
         position: absolute;
         z-index: -1;
         filter: blur(.4rem);
+        background-color: #ccc;
     }
     .itemTopContent{
         width: 100%;
@@ -209,6 +226,47 @@ export default {
             .icon{
                 fill: white;
                 margin-bottom: .1rem;
+            }
+        }
+    }
+    .skeletonContent{
+        width: 100%;
+        height: 3rem;
+        display: flex;
+        justify-content: space-between;
+        padding: .2rem;
+        .van-skeleton{
+            padding: 0;
+        }
+        .contentLeft{
+            width: 36%;
+            .titleImg{
+                .van-skeleton__avatar{
+                    width: 2.6rem;
+                    height: 2.6rem;
+                    border-radius: 0.2rem;
+                }
+            }
+        }
+        .contentRight{
+            width: 60%;
+            height: 2.6rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            .rightUserInfo{
+                width: 100%;
+                height: 0.6rem;
+                line-height: 0.6rem;
+            }
+            .rightDesc{
+                width: 100%;
+                height: .7rem;
+                .van-skeleton__content{
+                    width: 95%;
+                    height: 1rem;
+                    overflow: hidden;
+                }
             }
         }
     }

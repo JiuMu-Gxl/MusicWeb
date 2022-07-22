@@ -5,6 +5,7 @@
             <div class="more" @click="InitGeDan">查看更多</div>
         </div>
         <div class="musicContent">
+            <!-- 骨架屏 -->
             <van-swipe :loop="false" :show-indicators="false" :width="150" class="mySwipeSkeleton" v-show="state.loading">
                 <van-swipe-item v-for="(item, index) in 10" :key="index">
                     <van-skeleton avatar :loading="state.loading" />
