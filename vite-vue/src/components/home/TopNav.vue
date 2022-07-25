@@ -15,7 +15,7 @@
         <div class="topRight">
             <svg-icon iconName="icon-wymusicsousuo" class="icon" @click="showSearch"></svg-icon>
         </div>
-        <transition name="van-slide-right">
+        <transition name="van-slide-down">
             <div v-show="isSearch" class="search">
                 <van-search 
                     ref="searchInput" 
