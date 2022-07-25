@@ -26,7 +26,7 @@
     </div>
 </template>
 <script lang="ts">
-import { reactive, ref, onMounted, watch, computed } from 'vue';
+import { reactive, ref, onMounted, watch, computed, provide } from 'vue';
 import {mapState, useStore} from 'vuex';
 import ItemMusicList from '/@/components/item/ItemMusicList.vue';
 import MusicDetail from '/@/components/footer/MusicDetail.vue';
@@ -45,6 +45,7 @@ export default {
         // 通过ref获取dom元素
         const MusicPlayer = ref();
         const state_vuex = useStore();
+        provide("loading", false);
 
         // 使用计算属性动态获取vuex变量
         const isCanPlay = computed(() => {

@@ -11,39 +11,41 @@
             <svg-icon iconName="icon-wymusic31liebiao" class="icon" color="white"></svg-icon>
         </div>
     </div>
-    <!-- 骨架屏 -->
-    <div class="skeletonContent" v-show="loading">
-        <div class="contentLeft">
-            <van-skeleton avatar class="titleImg" :loading="loading"/>
-        </div>
-        <div class="contentRight">
-            <div class="rightTitle"><van-skeleton :row="2" :loading="loading"/></div>
-            <div class="rightUserInfo">
-                <van-skeleton avatar :row="1" :loading="loading"/>
+    <div class="topContent">
+        <!-- 骨架屏 -->
+        <div class="skeletonContent" v-show="loading">
+            <div class="contentLeft">
+                <van-skeleton avatar class="titleImg" :loading="loading"/>
             </div>
-            <div class="rightDesc">
-                <van-skeleton :row="3" :loading="loading"/>
-            </div>
-        </div>
-    </div>
-    <div class="itemTopContent" v-show="!loading">
-        <div class="contentLeft">
-            <img :src="playlist.coverImgUrl" :alt="playlist.name" />
-            <div class="palyCount">
-                <svg-icon iconName="icon-wymusicbofang-copy" class="icon"></svg-icon>
-                <span>{{ ChangeplayCount(playlist.playCount) }}</span>
+            <div class="contentRight">
+                <div class="rightTitle"><van-skeleton :row="2" :loading="loading"/></div>
+                <div class="rightUserInfo">
+                    <van-skeleton avatar :row="1" :loading="loading"/>
+                </div>
+                <div class="rightDesc">
+                    <van-skeleton :row="3" :loading="loading"/>
+                </div>
             </div>
         </div>
-        <div class="contentRight">
-            <div class="rightTitle">{{playlist.name}}</div>
-            <div class="rightUserInfo">
-                <img :src="playlist.creator.avatarUrl" class="userHeadImg">
-                <span class="userName">{{playlist.creator.nickname}}</span>
-                <svg-icon iconName="icon-wymusicxiangyou1" class="icon" color="#ccc"></svg-icon>
+        <div class="itemTopContent" v-show="!loading">
+            <div class="contentLeft">
+                <img :src="playlist.coverImgUrl" :alt="playlist.name" />
+                <div class="palyCount">
+                    <svg-icon iconName="icon-wymusicbofang-copy" class="icon"></svg-icon>
+                    <span>{{ ChangeplayCount(playlist.playCount) }}</span>
+                </div>
             </div>
-            <div class="rightDesc">
-                <span>{{playlist.description}}</span>
-                <svg-icon iconName="icon-wymusicxiangyou1" class="icon" color="#ccc"></svg-icon>
+            <div class="contentRight">
+                <div class="rightTitle">{{playlist.name}}</div>
+                <div class="rightUserInfo">
+                    <img :src="playlist.creator.avatarUrl" class="userHeadImg">
+                    <span class="userName">{{playlist.creator.nickname}}</span>
+                    <svg-icon iconName="icon-wymusicxiangyou1" class="icon" color="#ccc"></svg-icon>
+                </div>
+                <div class="rightDesc">
+                    <span>{{playlist.description}}</span>
+                    <svg-icon iconName="icon-wymusicxiangyou1" class="icon" color="#ccc"></svg-icon>
+                </div>
             </div>
         </div>
     </div>
@@ -58,7 +60,8 @@
         </div>
         <div class="iconItem">
             <svg-icon iconName="icon-wymusicxiazai" class="icon" color="white"></svg-icon>
-            <span>下载</span>
+            <!-- 同分享量和评论数一同加载展示 -->
+            <span v-show="playlist.id">下载</span>
         </div>
     </div>
 </template>
@@ -94,6 +97,7 @@ export default {
 }
 </script>
 <style lang="less">
+
     .ItemMusicTop{
         width: 100%;
         height: 1rem;
@@ -125,91 +129,138 @@ export default {
         filter: blur(.4rem);
         background-color: #ccc;
     }
-    .itemTopContent{
-        width: 100%;
+    .topContent{
         height: 3rem;
-        display: flex;
-        justify-content: space-between;
-        padding: .2rem;
-        .contentLeft{
-            width: 36%;
-            position: relative;
-            img{
-                width: 2.6rem;
-                height: 2.6rem;
-                border-radius: 0.2rem;
+        .itemTopContent{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: .2rem;
+            .contentLeft {
+                width: 36%;
+                position: relative;
+                img {
+                    width: 2.6rem;
+                    height: 2.6rem;
+                    border-radius: 0.2rem;
+                }
+                .palyCount {
+                    position: absolute;
+                    z-index: 0;
+                    top: 0;
+                    right: 0.1rem;
+                    color: white;
+                    .icon {
+                        width: 0.3rem;
+                        height: 0.3rem;
+                    }
+                }
             }
-            .palyCount{
-                position: absolute;
-                z-index: 0;
-                top: 0;
-                right: 0.1rem;
-                color: white;
-                .icon{
-                    width: 0.3rem;
-                    height: 0.3rem;
+            .contentRight {
+                width: 60%;
+                height: 2.6rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                .rightTitle {
+                    color: white;
+                }
+                .rightUserInfo {
+                    color: #ccc;
+                    width: 100%;
+                    height: 0.6rem;
+                    line-height: 0.6rem;
+                    .userHeadImg {
+                        width: 0.6rem;
+                        height: 0.6rem;
+                        border-radius: 0.6rem;
+                        vertical-align: middle;
+                    }
+                    .userName {
+                        margin: 0 0.1rem;
+                    }
+                    .icon {
+                        width: 0.3rem;
+                        height: 0.3rem;
+                        margin-top: -0.08rem;
+                        vertical-align: middle;
+                        fill: #ccc;
+                    }
+                }
+                .rightDesc {
+                    width: 100%;
+                    height: .7rem;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    span {
+                        width: 95%;
+                        height: 100%;
+                        display: inline-block;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                        font-size: 0.24rem;
+                        color: #ccc;
+                    }
+                    .icon {
+                        width: 0.3rem;
+                        height: 0.3rem;
+                        margin-top: -0.08rem;
+                        vertical-align: middle;
+                        fill: #ccc;
+                    }
                 }
             }
         }
-        .contentRight{
-            width: 60%;
-            height: 2.6rem;
+        .skeletonContent{
+            width: 100%;
+            height: 100%;
             display: flex;
-            flex-direction: column;
             justify-content: space-between;
-            .rightTitle{
-                color: white;
+            padding: .2rem;
+            position: fixed;
+            overflow: hidden;
+            .van-skeleton{
+                padding: 0;
             }
-            .rightUserInfo{
-                color: #ccc;
-                width: 100%;
-                height: 0.6rem;
-                line-height: 0.6rem;
-                .userHeadImg{
-                    width: 0.6rem;
-                    height: 0.6rem;
-                    border-radius: 0.6rem;
-                    vertical-align: middle;
-                }
-                .userName{
-                    margin: 0 0.1rem;
-                }
-                .icon {
-                    width: 0.3rem;
-                    height: 0.3rem;
-                    margin-top: -0.08rem;
-                    vertical-align: middle;
-                    fill: #ccc;
+            .contentLeft{
+                width: 36%;
+                .titleImg{
+                    .van-skeleton__avatar{
+                        width: 2.6rem;
+                        height: 2.6rem;
+                        border-radius: 0.2rem;
+                    }
                 }
             }
-            .rightDesc{
-                width: 100%;
-                height: .7rem;
+            .contentRight{
+                width: 60%;
+                height: 2.6rem;
                 display: flex;
+                flex-direction: column;
                 justify-content: space-between;
-                align-items: center;
-                span{
-                    width: 95%;
-                    height: 100%;
-                    display: inline-block;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    display: -webkit-box;
-                    -webkit-line-clamp: 2;
-                    -webkit-box-orient: vertical;
-                    font-size: 0.24rem;
-                    color: #ccc;
+                .rightUserInfo{
+                    width: 100%;
+                    height: 0.6rem;
+                    line-height: 0.6rem;
                 }
-                .icon {
-                    width: 0.3rem;
-                    height: 0.3rem;
-                    margin-top: -0.08rem;
-                    vertical-align: middle;
-                    fill: #ccc;
+                .rightDesc{
+                    width: 100%;
+                    height: .7rem;
+                    .van-skeleton__content{
+                        width: 95%;
+                        height: 1rem;
+                        overflow: hidden;
+                    }
                 }
             }
         }
     }
+    
     .itemTopFooter{
         width: 100%;
         height: 1.4rem;
@@ -229,45 +280,5 @@ export default {
             }
         }
     }
-    .skeletonContent{
-        width: 100%;
-        height: 3rem;
-        display: flex;
-        justify-content: space-between;
-        padding: .2rem;
-        .van-skeleton{
-            padding: 0;
-        }
-        .contentLeft{
-            width: 36%;
-            .titleImg{
-                .van-skeleton__avatar{
-                    width: 2.6rem;
-                    height: 2.6rem;
-                    border-radius: 0.2rem;
-                }
-            }
-        }
-        .contentRight{
-            width: 60%;
-            height: 2.6rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            .rightUserInfo{
-                width: 100%;
-                height: 0.6rem;
-                line-height: 0.6rem;
-            }
-            .rightDesc{
-                width: 100%;
-                height: .7rem;
-                .van-skeleton__content{
-                    width: 95%;
-                    height: 1rem;
-                    overflow: hidden;
-                }
-            }
-        }
-    }
+    
 </style>
